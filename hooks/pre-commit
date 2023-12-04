@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Navigate to the prompts directory
+cd prompts
+
+# Flag to track errors
+error=0
+
+# Loop through all .prompt.txt files
+for prompt in $(find . -type f -name '*.prompt.txt'); do
+    # Derive the corresponding readme filename
+    readme="${prompt%.prompt.txt}.readme.md"
+
+    # Check if the readme file exists
+    if [ ! -f "$readme" ]; then
+        echo "Error: Missing corresponding README for $prompt"
+        error=1
+    fi
+done
+
+# Loop through all .readme.md files
+for readme in $(find . -type f -name '*.readme.md'); do
+    # Derive the corresponding prompt filename
+    prompt="${readme%.readme.md}.prompt.txt"
+
+    # Check if the prompt file exists
+    if [ ! -f "$prompt" ]; then
+        echo "Error: Missing corresponding prompt for $readme"
+        error=1
+    fi
+done
+
+# Return to the original directory
+cd -
+
+# If an error was found, exit with a non-zero status
+if [ $error -ne 0 ]; then
+    echo "Pre-commit check failed: Each .prompt.txt file must have a corresponding .readme.md file and vice versa."
+    exit 1
+fi
+
+exit 0
