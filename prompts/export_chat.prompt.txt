@@ -1,0 +1,10 @@
+Export the full conversation - except this last message - to JSON, using the following format: 
+[
+    {"role": "system", "content": "..."},
+    {"role": "user", "content": "..."},
+    {"role": "assistant", "content": "...."},
+    {"role": "user", "content": "..."},
+    ...
+  ]
+
+Write the JSON to a file and offer for download.
