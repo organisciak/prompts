@@ -1,0 +1,1 @@
+This directory contains basic privacy policies. They don't necessarily apply to this repo, but are for linking from GPTs. Feel free to adapt.
